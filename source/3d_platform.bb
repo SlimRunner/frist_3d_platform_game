@@ -55,11 +55,11 @@ Const COLLIDE_GOAL = 4
 
 Const FRAMERATE = 60
 
-Const GRAVITY_ACCEL# = -8.0*0.01 ;was -0.023
-Const MOVE_FORCE# = 9.5 * 0.02 ;was 0.1
-Const JUMP_FORCE# = 40 * 0.02 ;was 0.45
+Const GRAVITY_ACCEL# = -2*0.01 ;was 8;was -0.023
+Const MOVE_FORCE# = 4.75 * 0.02 ;was 9.5;was 0.1
+Const JUMP_FORCE# = 20 * 0.02 ;was 40;was 0.45
 
-Const FALL_DAMAGE# = -1.20 ;was 0.8
+Const FALL_DAMAGE# = -0.6 ;was -1.20 ;was 0.8
 Const GRACE_PERIOD = 60
 
 ;*****************************************************************
@@ -240,16 +240,16 @@ charHealth# = 100.0
 
 ;game loop starts here
 While (Not KeyDown(SC_ESQ)) And winflag = false And charHealth > 0
-	;frame rate control
-	If frameDuration > DesiredDelay Then
-		dispDelay = frameDuration;1000 / frameDuration
-	Else
-		delay DesiredDelay
-		dispDelay = DesiredDelay
-	End if
 	
 	;updates timer
 	last_timer = MilliSecs()
+	;frame rate control
+	If frameDuration > DesiredDelay Then
+		dispDelay = frameDuration ;1000 / frameDuration
+	Else
+		delay DesiredDelay - frameDuration
+		dispDelay = DesiredDelay
+	End if
 	
 	speed_x#=0
 	speed_z#=0
